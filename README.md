@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oportunidade de Negócio - I Love Juice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Citrus Accent -->
+    <!-- Application Structure Plan: A top-down narrative flow designed for potential investors. It starts with a Hero Section containing the core value proposition and price. It is followed by 'The Opportunity' section with key differentiators. Then, an interactive 'Financial Dashboard' to analyze numbers. Next, a 'What's Included' section lists all assets. A 'Brand & Market' section builds trust, and it all ends with a clear Call to Action. This structure guides the user from initial interest to detailed analysis and contact, maximizing clarity and engagement. -->
+    <!-- Visualization & Content Choices: Report Info (Financials) -> Goal (Compare/Analyze) -> Viz (Interactive Bar & Donut Charts) -> Interaction (Tooltips on hover) -> Justification (Charts provide a quick, clear understanding of profitability and cost structure) -> Library (Chart.js). Report Info (Asset List) -> Goal (Organize) -> Presentation (Icon-based grid) -> Interaction (None) -> Justification (Visually scannable and easy to digest) -> Method (HTML/Tailwind). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FDFBF8;
+            color: #333;
+        }
+        .bg-hero {
+            background-color: #F97316; /* Laranja sólido */
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background-color: #F97316;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #EA580C;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        nav a {
+            transition: color 0.3s;
+        }
+        nav a.active {
+            color: #F97316;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-orange-500 flex items-center">
+                <span class="text-3xl mr-2">🍊</span> I Love Juice
+            </a>
+            <div class="hidden md:flex space-x-8 text-gray-600">
+                <a href="#oportunidade" class="hover:text-orange-500">A Oportunidade</a>
+                <a href="#financeiro" class="hover:text-orange-500">Análise Financeira</a>
+                <a href="#pacote" class="hover:text-orange-500">O Que Está Incluso</a>
+                <a href="#contato" class="hover:text-orange-500 btn-primary rounded-full px-5 py-2">Contato</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#oportunidade" class="block text-gray-600 hover:text-orange-500">A Oportunidade</a>
+            <a href="#financeiro" class="block text-gray-600 hover:text-orange-500">Análise Financeira</a>
+            <a href="#pacote" class="block text-gray-600 hover:text-orange-500">O Que Está Incluso</a>
+            <a href="#contato" class="block text-gray-600 hover:text-orange-500">Contato</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="min-h-screen flex items-center bg-hero text-white">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-shadow leading-tight">Seja Dono do seu Próprio Negócio de Sucesso</h1>
+                <p class="text-lg md:text-2xl mb-6 text-shadow">Adquira a I Love Juice: uma marca pronta, lucrativa e que encanta clientes.</p>
+                <div class="bg-white/20 backdrop-blur-sm inline-block p-4 md:p-6 rounded-2xl border border-white/30">
+                    <p class="text-xl md:text-2xl font-light mb-2">Investimento Total</p>
+                    <p class="text-4xl md:text-6xl font-bold tracking-tight">R$ 80.000,00</p>
+                    <p class="text-sm mt-2 font-light">(Condições facilitadas à vista ou parcelado)</p>
+                </div>
+                <div class="mt-8">
+                    <a href="#contato" class="btn-primary font-bold text-lg rounded-full px-10 py-4 inline-block">Quero Saber Mais!</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="oportunidade" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Uma Oportunidade Única</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">A I Love Juice não é apenas um quiosque de suco. É um negócio completo, testado e aprovado, pronto para você operar e lucrar desde o primeiro dia.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="card text-center">
+                        <div class="text-5xl mb-4 text-orange-500">🚚</div>
+                        <h3 class="text-xl font-semibold mb-2">Negócio Móvel e Flexível</h3>
+                        <p class="text-gray-600">Leve seu negócio para os melhores pontos, eventos e festivais. O trailer temático atrai clientes onde quer que você esteja.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div class="text-5xl mb-4 text-orange-500">🔑</div>
+                        <h3 class="text-xl font-semibold mb-2">Estrutura Completa</h3>
+                        <p class="text-gray-600">Receba o negócio "chave na mão", com todos os equipamentos, marca registrada, redes sociais e contatos de fornecedores.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div class="text-5xl mb-4 text-orange-500">💰</div>
+                        <h3 class="text-xl font-semibold mb-2">Alta Lucratividade</h3>
+                        <p class="text-gray-600">Com um faturamento médio de R$ 13 mil/mês e margem de mais de 50%, o retorno do seu investimento é rápido e consistente.</p>
+                    </div>
+                    <div class="card text-center">
+                        <div class="text-5xl mb-4 text-orange-500">⭐</div>
+                        <h3 class="text-xl font-semibold mb-2">Marca Forte e Reconhecida</h3>
+                        <p class="text-gray-600">Uma marca com identidade visual única, registrada no INPI e com o prestigiado Selo Amapá, garantindo credibilidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="financeiro" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Painel Financeiro Interativo</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">Analise os números que comprovam o potencial do negócio. Passe o mouse sobre os gráficos para ver os detalhes.</p>
+                </div>
+                <div class="grid lg:grid-cols-5 gap-8 items-center">
+                    <div class="lg:col-span-2 space-y-6">
+                         <div class="card">
+                            <h3 class="font-semibold text-gray-700 mb-1">Faturamento Médio Mensal</h3>
+                            <p class="text-4xl font-bold text-orange-500">R$ 13.000</p>
+                        </div>
+                         <div class="card">
+                            <h3 class="font-semibold text-gray-700 mb-1">Margem de Contribuição</h3>
+                            <p class="text-4xl font-bold text-green-600">53,33%</p>
+                            <p class="text-sm text-gray-500">Potencial de lucro rápido</p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3 card">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Rentabilidade por Garrafa (330ml)</h3>
+                        <div class="chart-container">
+                            <canvas id="rentabilidadeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 card">
+                     <h3 class="text-xl font-semibold mb-4 text-center">Composição dos Custos Fixos Mensais (Total: R$ 3.412)</h3>
+                     <div class="chart-container h-64 md:h-80">
+                         <canvas id="custosFixosChart"></canvas>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pacote" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Um Pacote Completo Para Você Começar</h2>
+                    <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">O investimento de R$ 80.000,00 inclui uma estrutura robusta e todos os ativos necessários para operar com sucesso.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card">
+                        <h3 class="font-semibold text-xl mb-3 text-orange-600">Estrutura Principal</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Trailer Temático de Laranja:</strong> Medindo 2.10m x 2.10m, com motor de abertura.</div></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Mini Freezer Expositor:</strong> 220v para manter os sucos gelados.</div></li>
+                            <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Carrinho de Venda Temático:</strong> Para ações em locais de difícil acesso, capacidade para 120 garrafas.</div></li>
+                             <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Kit Atendimento:</strong> 11 cadeiras de praia e 5 mesas plásticas.</div></li>
+                        </ul>
+                    </div>
+                     <div class="card">
+                        <h3 class="font-semibold text-xl mb-3 text-orange-600">Equipamentos de Produção</h3>
+                        <ul class="space-y-2 text-gray-700">
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Máquina de Suco Profissional:</strong> 220v, com alimentador automático para 100 laranjas.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Inversor de Energia:</strong> 2000 watts para autonomia do trailer.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Caixa d'água 310L:</strong> Para higienização.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>7 Basquetas Plásticas:</strong> Para armazenamento de laranjas.</div></li>
+                        </ul>
+                    </div>
+                     <div class="card">
+                        <h3 class="font-semibold text-xl mb-3 text-orange-600">Ativos da Marca e Suporte</h3>
+                        <ul class="space-y-2 text-gray-700">
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Marca Registrada no INPI:</strong> Proteção e exclusividade.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Certificado Selo Amapá:</strong> Credibilidade e acesso a benefícios.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Redes Sociais Ativas:</strong> Perfil no Instagram (@iloovejuice) e presença no iFood.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Suporte Inicial:</strong> Treinamento e indicação de fornecedores e parceiros.</div></li>
+                           <li class="flex items-start"><span class="mr-2 mt-1">✓</span><div><strong>Planilha Financeira:</strong> Para controle total do negócio.</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-16 md:py-24">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Pronto para Mudar de Vida?</h2>
+                 <p class="text-lg text-gray-600 mt-2 max-w-3xl mx-auto">O negócio está montado, os clientes conhecem a marca e o potencial é enorme. Você só precisa dizer "sim" para essa oportunidade.</p>
+                 <div class="mt-10">
+                     <div class="inline-block card bg-orange-50 border-orange-200 border">
+                         <h3 class="text-xl font-semibold text-gray-800">Fale diretamente com o proprietário</h3>
+                         <p class="text-3xl font-bold text-orange-600 my-4">(96) 98106-6224</p>
+                         <p class="text-lg text-gray-700">Rhuan Christopher</p>
+                         <a href="https://wa.me/5596981066224" target="_blank" class="mt-6 btn-primary font-bold text-lg rounded-full px-10 py-4 inline-block">Chamar no WhatsApp</a>
+                     </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 I Love Juice. Todos os direitos reservados.</p>
+            <p class="text-sm text-gray-400 mt-2">Esta é uma apresentação de oportunidade de negócio.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+            
+            const sections = document.querySelectorAll('section[id]');
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('nav a.active').forEach(a => a.classList.remove('active'));
+                        const link = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+                        if (link) {
+                            link.classList.add('active');
+                        }
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+            sections.forEach(section => {
+                navObserver.observe(section);
+            });
+
+
+            const custoProducao = 5.60;
+            const precoVenda = 12.00;
+            const lucroBruto = precoVenda - custoProducao;
+
+            const rentabilidadeCtx = document.getElementById('rentabilidadeChart').getContext('2d');
+            new Chart(rentabilidadeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Custo de Produção', 'Lucro Bruto', 'Preço de Venda'],
+                    datasets: [{
+                        label: 'Valor (R$)',
+                        data: [custoProducao, lucroBruto, precoVenda],
+                        backgroundColor: [
+                            'rgba(251, 146, 60, 0.7)',
+                            'rgba(22, 163, 74, 0.7)',
+                            'rgba(249, 115, 22, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(251, 146, 60, 1)',
+                            'rgba(22, 163, 74, 1)',
+                            'rgba(249, 115, 22, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` R$ ${context.raw.toFixed(2)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const custosFixosCtx = document.getElementById('custosFixosChart').getContext('2d');
+            new Chart(custosFixosCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Funcionário', 'Marketing', 'Energia', 'Limpeza', 'CNPJ (MEI)', 'Internet'],
+                    datasets: [{
+                        label: 'Custo Fixo Mensal',
+                        data: [1900, 1000, 200, 100, 75.90, 112],
+                        backgroundColor: [
+                            '#F97316',
+                            '#FB923C',
+                            '#FDBA74',
+                            '#FED7AA',
+                            '#16A34A',
+                            '#4ADE80',
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
